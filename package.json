@@ -1,0 +1,21 @@
+{
+  "name": "ofcpokerweb",
+  "version": "1.0.0",
+  "description": "OFC Poker Web-Based Game",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anatoly-os/ofcpokerweb.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anatoly-os/ofcpokerweb/issues"
+  },
+  "homepage": "https://github.com/anatoly-os/ofcpokerweb#readme"
+}
