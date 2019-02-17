@@ -1,18 +1,28 @@
-const http = require('http');
-const fs = require('fs');
+const app = require('express')();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+const time = require('./timeNow');
 
-const server = http.createServer(function (request, response) {
-    console.log(request.method, request.url);
-    if (request.url === "/style.css") {
-        const text = fs.readFileSync('style.css', 'utf8');
-        response.end(text);    
-    }
-    else {
-        const text = fs.readFileSync('index.html', 'utf8');
-        response.end(text);
-    }
+app.get('/', function (req, res) {
+    console.log('index.html request');
+    res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/style.css', function (req, res) {
+    console.log('style.css request');
+    res.sendFile(__dirname + '/style.css');
+});
+
+io.on('connection', function (socket) {    
+    console.log(time.timeNow() + ' a user connected');
+    socket.on('chat message', function(msg) {
+        io.emit('chat message', msg);
+    });
+    socket.on('disconnect', function () {
+        console.log(time.timeNow() + ' user disconnected'); 
+ }); 
+});
+ 
 console.log('port = ', process.env.PORT);
 server.listen(process.env.PORT || 3000);
 console.log('Server Started!');
