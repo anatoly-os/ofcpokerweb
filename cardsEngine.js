@@ -21,7 +21,7 @@ const ValuesEnum = {
     13 : {name: "King", shortName: "K"}
 };
 
-export class Card {
+class Card {
     constructor(val, sui) {
         this.value = val;
         this.suite = sui;
@@ -57,7 +57,7 @@ function shuffle(array) {
     return array;
 };
 
-export class CardDeck
+class CardDeck
 {
     constructor() {
         console.log('constructing CardDeck!');
@@ -77,4 +77,8 @@ export class CardDeck
             return temp;
         }
     }
+};
+
+module.exports = {
+    CardDeck: CardDeck
 };
