@@ -15,11 +15,11 @@ app.get('/style.css', function (req, res) {
 });
 
 let CardDeck = cardDeckModule.CardDeck;
-
+let cardDeckWorker;
 io.on('connection', function (socket) {    
     console.log(time.timeNow() + ' a user connected');
     socket.on('deal cards', function() {
-        const cards3 = CardDeck.dealCards(3);
+        const cards3 = cardDeckWorker.dealCards(3);
         io.emit('cards dealt', 
         [ cards3[0].longName(),
           cards3[1].longName(),
@@ -27,7 +27,7 @@ io.on('connection', function (socket) {
     });
     socket.on('start game', function () {
         console.log('Start Game!');
-        CardDeck = new CardDeck();
+        cardDeckWorker = new CardDeck();
     });
     socket.on('disconnect', function () {
         console.log(time.timeNow() + ' user disconnected'); 
